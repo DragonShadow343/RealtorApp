@@ -12,6 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RealtorApp">
         <activity
+            android:name=".Adapters.FavouriteAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.FavouritesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.BookingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.CreateListingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.ListingDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
