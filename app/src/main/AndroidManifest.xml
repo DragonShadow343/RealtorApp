@@ -11,6 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RealtorApp">
+
+        <activity
+            android:name=".Activities.FirstActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".Activities.SignupActivity"
+            android:exported="false" />
         <activity
             android:name=".Adapters.FavouriteAdapter"
             android:exported="false" />
@@ -33,7 +40,7 @@
             android:name=".Activities.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
