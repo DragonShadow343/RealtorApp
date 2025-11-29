@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "334047155828",
+    "project_id": "realtorapp-8543c",
+    "storage_bucket": "realtorapp-8543c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334047155828:android:e59d8c7897dde53a0c6321",
+        "android_client_info": {
+          "package_name": "com.example.realtorapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFKUfiCajOIJ7nCKcsIlWBpwvIuZZOmUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
