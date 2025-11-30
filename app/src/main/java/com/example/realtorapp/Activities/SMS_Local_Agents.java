@@ -1,66 +1,92 @@
 package com.example.realtorapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.realtorapp.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SMS_Local_Agents#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class SMS_Local_Agents extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    ListView listView;
+    ArrayList<SMS_Agent> agentList;
+    SMS_AgentAdapter adapter;
+    DatabaseReference databaseReference;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public SMS_Local_Agents() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SMS_Local_Agents.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SMS_Local_Agents newInstance(String param1, String param2) {
-        SMS_Local_Agents fragment = new SMS_Local_Agents();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    public SMS_Local_Agents() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_s_m_s__local__agents, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_s_m_s__local__agents, container, false);
+
+        listView = view.findViewById(R.id.listViewLocal);
+        agentList = new ArrayList<>();
+
+        adapter = new SMS_AgentAdapter(getActivity(), agentList);
+        listView.setAdapter(adapter);
+
+        // Handle clicks on agent items
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SMS_Agent clickedAgent = agentList.get(position);
+
+                // Pass details to the next screen
+                Intent intent = new Intent(getActivity(), SMS_AgentDetailsActivity.class);
+                intent.putExtra("name", clickedAgent.name);
+                intent.putExtra("bio", clickedAgent.bio);
+                intent.putExtra("rating", clickedAgent.rating);
+                intent.putExtra("image", clickedAgent.imageUrl);
+
+                startActivity(intent);
+            }
+        });
+
+        // Fetch data from Firebase
+        databaseReference = FirebaseDatabase.getInstance().getReference("Shukan").child("agents");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                agentList.clear();
+
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    try {
+                        SMS_Agent agent = data.getValue(SMS_Agent.class);
+                        if (agent != null) {
+                            agentList.add(agent);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                if (getActivity() != null) {
+                    Toast.makeText(getActivity(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        return view;
     }
 }

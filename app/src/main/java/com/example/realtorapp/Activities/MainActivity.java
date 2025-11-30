@@ -33,4 +33,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FirstActivity.class);
         startActivity(intent);
     }
+
+    public void loadAgents(View view) {
+        // This command swaps the screen content
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main, new SMS_Local_Agents()) // R.id.main matches the XML ID above
+                .addToBackStack(null) // Allows pressing "Back" to return to buttons
+                .commit();
+    }
 }

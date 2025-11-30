@@ -37,6 +37,8 @@ android {
 
 dependencies {
     implementation(platform("com.google.firebase:firebase-bom:34.6.0"))
+    implementation("com.google.firebase:firebase-database")
+    implementation("com.squareup.picasso:picasso:2.8")
     implementation("com.google.firebase:firebase-analytics")
     implementation(libs.appcompat)
     implementation(libs.material)
