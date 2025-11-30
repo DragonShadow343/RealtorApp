@@ -48,22 +48,31 @@ public class SMS_AgentAdapter extends BaseAdapter {
 
         TextView nameView = convertView.findViewById(R.id.tvName);
         TextView bioView = convertView.findViewById(R.id.tvBio);
+        TextView ratingView = convertView.findViewById(R.id.tvRating); // Bind the rating view
         ImageView imageView = convertView.findViewById(R.id.imgAgent);
 
-        // Safely set text data
+        // Set agent name
         if (currentAgent.name != null) {
             nameView.setText(currentAgent.name);
         } else {
             nameView.setText("Unknown Agent");
         }
 
+        // Set agent bio
         if (currentAgent.bio != null) {
             bioView.setText(currentAgent.bio);
         } else {
             bioView.setText("No bio available");
         }
 
-        // Load profile image with Picasso
+        // Set agent rating
+        if (currentAgent.rating != null) {
+            ratingView.setText(String.valueOf(currentAgent.rating) + " ⭐");
+        } else {
+            ratingView.setText("N/A ⭐");
+        }
+
+        // Load profile image
         if (currentAgent.imageUrl != null && !currentAgent.imageUrl.isEmpty()) {
             Picasso.get()
                    .load(currentAgent.imageUrl)

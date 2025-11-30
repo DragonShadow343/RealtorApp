@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,9 +23,10 @@ import java.util.ArrayList;
 
 public class SMS_Local_Agents extends Fragment {
 
-    ListView listView;
-    ArrayList<SMS_Agent> agentList;
-    SMS_AgentAdapter adapter;
+    ListView listViewLocal, listViewAll;
+    ImageButton btnBackHome; // Back Button
+    ArrayList<SMS_Agent> localList, allList;
+    SMS_AgentAdapter localAdapter, allAdapter;
     DatabaseReference databaseReference;
 
     public SMS_Local_Agents() {}
@@ -35,48 +37,76 @@ public class SMS_Local_Agents extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_s_m_s__local__agents, container, false);
 
-        listView = view.findViewById(R.id.listViewLocal);
-        agentList = new ArrayList<>();
+        // Initialize Views
+        listViewLocal = view.findViewById(R.id.listViewLocal);
+        listViewAll = view.findViewById(R.id.listViewAllExperts);
+        btnBackHome = view.findViewById(R.id.btnBackHome);
 
-        adapter = new SMS_AgentAdapter(getActivity(), agentList);
-        listView.setAdapter(adapter);
+        localList = new ArrayList<>();
+        allList = new ArrayList<>();
 
-        // Handle clicks on agent items
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SMS_Agent clickedAgent = agentList.get(position);
+        localAdapter = new SMS_AgentAdapter(getActivity(), localList);
+        allAdapter = new SMS_AgentAdapter(getActivity(), allList);
 
-                // Pass details to the next screen
-                Intent intent = new Intent(getActivity(), SMS_AgentDetailsActivity.class);
-                intent.putExtra("name", clickedAgent.name);
-                intent.putExtra("bio", clickedAgent.bio);
-                intent.putExtra("rating", clickedAgent.rating);
-                intent.putExtra("image", clickedAgent.imageUrl);
+        listViewLocal.setAdapter(localAdapter);
+        listViewAll.setAdapter(allAdapter);
 
-                startActivity(intent);
+        // Back Button Logic
+        btnBackHome.setOnClickListener(v -> {
+            // Assuming HomeActivity is the main home screen
+            Intent intent = new Intent(getActivity(), HomeActivity.class);
+            // Clear flags so pressing back doesn't loop
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            // Optional: finish() current activity if this fragment is inside one that should close
+            if (getActivity() != null) {
+                getActivity().finish();
             }
         });
 
-        // Fetch data from Firebase
+        // Click Listener for Agents
+        AdapterView.OnItemClickListener listener = (parent, v, position, id) -> {
+            SMS_Agent clickedAgent = (SMS_Agent) parent.getItemAtPosition(position);
+            Intent intent = new Intent(getActivity(), SMS_AgentDetailsActivity.class);
+            intent.putExtra("name", clickedAgent.name);
+            intent.putExtra("bio", clickedAgent.bio);
+            intent.putExtra("rating", clickedAgent.rating);
+            intent.putExtra("image", clickedAgent.imageUrl);
+            startActivity(intent);
+        };
+
+        listViewLocal.setOnItemClickListener(listener);
+        listViewAll.setOnItemClickListener(listener);
+
+        // Retrieve agents from Firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("Shukan").child("agents");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                agentList.clear();
+                localList.clear();
+                allList.clear();
 
+                int count = 0;
                 for (DataSnapshot data : snapshot.getChildren()) {
                     try {
                         SMS_Agent agent = data.getValue(SMS_Agent.class);
                         if (agent != null) {
-                            agentList.add(agent);
+                            // Top 3 agents go to Local/Top Experts section
+                            if (count < 3) {
+                                localList.add(agent);
+                            } else if (count < 20) {
+                                // Agents 4 to 20 go to All Experts section
+                                allList.add(agent);
+                            }
+                            count++;
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
-                adapter.notifyDataSetChanged();
+                localAdapter.notifyDataSetChanged();
+                allAdapter.notifyDataSetChanged();
             }
 
             @Override
