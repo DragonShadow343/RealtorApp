@@ -1,6 +1,9 @@
-package com.example.realtorapp;
+package com.example.realtorapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,7 +11,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.realtorapp.R;
+
 public class MainActivity extends AppCompatActivity {
+
+    Button bit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +27,10 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    public void goHome(View view){
+        Intent intent = new Intent(this, FirstActivity.class);
+        startActivity(intent);
     }
 }
