@@ -7,4 +7,77 @@
     android:layout_height="match_parent"
     tools:context=".Activities.SignupActivity">
 
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="280dp"
+        android:layout_height="306dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.371">
+
+        <EditText
+            android:id="@+id/name_input"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/email_signup_input"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/password_signup_input"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+        <Spinner
+            android:id="@+id/type_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:autofillHints="Pick the type of user"
+            android:entries="@array/type_of_user" />
+
+        <Button
+            android:id="@+id/signup_btn"
+            android:layout_width="211dp"
+            android:layout_height="wrap_content"
+            android:onClick="clickSignup"
+            android:text="SIGNUP" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/guest_signup_btn"
+        android:layout_width="207dp"
+        android:layout_height="48dp"
+        android:text="CONTINUE AS A GUEST"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
+
+    <TextView
+        android:id="@+id/login_signupActivity_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.917" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,10 @@
 <resources>
+    <string-array name="type_of_user">
+        <item>buyer</item>
+        <item>student</item>
+        <item>agent</item>
+        <item>landlord</item>
+    </string-array>
     <string name="app_name">RealtorApp</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
