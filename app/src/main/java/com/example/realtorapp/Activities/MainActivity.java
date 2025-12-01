@@ -34,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goUpload(View view) {
+        Intent intent = new Intent(this, UploadListingActivity.class);
+        startActivity(intent);
+    }
     public void loadAgents(View view) {
         // This command swaps the screen content
         getSupportFragmentManager().beginTransaction()

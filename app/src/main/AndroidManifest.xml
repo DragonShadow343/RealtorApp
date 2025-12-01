@@ -13,10 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RealtorApp">
-
+        <activity
+            android:name=".Activities.UploadListingActivity"
+            android:exported="false" />
         <activity
             android:name=".Activities.FirstActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Activities.SignupActivity"
             android:exported="false" />
