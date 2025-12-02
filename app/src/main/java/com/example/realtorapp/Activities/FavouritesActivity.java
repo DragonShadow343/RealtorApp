@@ -80,11 +80,4 @@ public class FavouritesActivity extends AppCompatActivity {
             });
         }
     }
-
-    public void goToHome() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
 }
