@@ -7,17 +7,41 @@
     android:layout_height="match_parent"
     tools:context=".Activities.HomeActivity">
 
+
+    <fragment
+        android:id="@+id/homeMap"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="359dp"
+        android:layout_height="243dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.229" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listingsRecycler"
+        android:layout_width="389dp"
+        android:layout_height="304dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/homeMap"
+        app:layout_constraintVertical_bias="0.777" />
+
     <TextView
-        android:id="@+id/test_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="351dp"
-        android:layout_marginEnd="181dp"
-        android:layout_marginBottom="361dp"
-        android:text="Home Screen"
+        android:id="@+id/TItle_text"
+        android:layout_width="179dp"
+        android:layout_height="37dp"
+        android:text="Listings In Kelowna"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.097" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+

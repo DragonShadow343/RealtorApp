@@ -3,7 +3,9 @@ package com.example.realtorapp.auth;
 import com.example.realtorapp.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.Firebase;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,6 +24,10 @@ public class AuthRepo {
     }
 
     public void signup(String name, String email, String password, String type, OnCompleteListener<AuthResult> listener) {
+
+
+
+        //this code is to create a new user when user clicks on signup button
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
 
             listener.onComplete(task); // activity signup completed
@@ -33,6 +39,16 @@ public class AuthRepo {
 
                 FirebaseFirestore.getInstance().collection("users").document(userId).set(user);// this is to manage the data in the database
                     // it creates a collection User under there it will store User accordingt to their user id.
+                        /*
+                        users
+                            userId
+                                name
+                                email
+                                type
+                                verified
+
+                         */
+
             }
 
     });
@@ -50,4 +66,9 @@ public class AuthRepo {
 
         return false;
     }
+
+    public void guestLogin(OnCompleteListener<AuthResult> listener) {
+        auth.signInAnonymously().addOnCompleteListener(listener);
+    }
 }
+

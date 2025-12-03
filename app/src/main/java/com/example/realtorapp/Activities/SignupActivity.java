@@ -123,6 +123,12 @@ public class SignupActivity extends AppCompatActivity {
         });
         }
 
+        public void signupASguest(View view) {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
 
