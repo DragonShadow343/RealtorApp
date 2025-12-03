@@ -1,6 +1,7 @@
 package com.example.realtorapp.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.realtorapp.R;
 import com.example.realtorapp.model.PropertyListing;
+import com.example.realtorapp.repository.EditUploadListing;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -50,6 +52,7 @@ public class UploadListingActivity extends AppCompatActivity {
         PriceListing = findViewById(R.id.PriceListing);
         NotesOptional = findViewById(R.id.NotesOptional);
         PetYes = findViewById(R.id.PetYes);
+        findViewById(R.id.CheckButton).setOnClickListener(v -> goToReviewPage());
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -59,7 +62,8 @@ public class UploadListingActivity extends AppCompatActivity {
         });
     }
 
-    private void addListingToFirebase() {
+
+    private void goToReviewPage() {
 
         String title = TitleListing.getText().toString().trim();
         String owner = OwnerListing.getText().toString().trim();
@@ -69,71 +73,38 @@ public class UploadListingActivity extends AppCompatActivity {
 
         String addr1 = Address1.getText().toString().trim();
         String addr2 = Address2.getText().toString().trim();
-        int beds = Integer.parseInt(BedsNo.getText().toString().trim());
-        int baths = Integer.parseInt(NoBath.getText().toString().trim());
-        double price = Double.parseDouble(PriceListing.getText().toString().trim());
+        String bedsStr = BedsNo.getText().toString().trim();
+        String bathsStr = NoBath.getText().toString().trim();
+        String priceStr = PriceListing.getText().toString().trim();
 
         boolean petFriendly = PetYes.isChecked();
 
+
         if (title.isEmpty() || owner.isEmpty() || email.isEmpty() ||
-                phone.isEmpty() || addr1.isEmpty() || price == 0 ||
-                beds == 0 || baths == 0) {
+                phone.isEmpty() || addr1.isEmpty() ||
+                bedsStr.isEmpty() || bathsStr.isEmpty() || priceStr.isEmpty()) {
 
             Toast.makeText(this, "Please fill in all required fields with '*'", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String fullAddress = addr1 + ", " + addr2;
-        double latitude = 0;
-        double longitude = 0;
 
-        try {
-            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-            List<Address> locations = geocoder.getFromLocationName(fullAddress, 1);
+        Intent reviewPage = new Intent(this, EditUploadListing.class);
 
-            if (locations != null && !locations.isEmpty()) {
-                Address loc = locations.get(0);
-                latitude = loc.getLatitude();
-                longitude = loc.getLongitude();
-            } else {
-                Toast.makeText(this, "Unable to find this address", Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Geocoder Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-        }
+        reviewPage.putExtra("title", title);
+        reviewPage.putExtra("owner", owner);
+        reviewPage.putExtra("email", email);
+        reviewPage.putExtra("phone", phone);
+        reviewPage.putExtra("description", description);
+        reviewPage.putExtra("addr1", addr1);
+        reviewPage.putExtra("addr2", addr2);
+        reviewPage.putExtra("beds", bedsStr);
+        reviewPage.putExtra("baths", bathsStr);
+        reviewPage.putExtra("price", priceStr);
+        reviewPage.putExtra("petFriendly", petFriendly);
 
-
-        String listingId = UUID.randomUUID().toString();
-        PropertyListing listing = new PropertyListing();
-        listing.setListingId(listingId);
-        listing.setTitle(title);
-        listing.setDescription(description);
-        listing.setAddress(fullAddress);
-        listing.setPrice(price);
-        listing.setBedroom(beds);
-        listing.setBathroom(baths);
-        listing.setPetFriendly(petFriendly);
-        listing.setAgentId(FirebaseAuth.getInstance().getUid());
-        listing.setStatus("Pending");
-        listing.setLattitude(latitude);
-        listing.setLongitude(longitude);
-
-
-        DatabaseReference ref =
-                FirebaseDatabase.getInstance().getReference("property_listings");
-
-        ref.child(listingId)
-                .setValue(listing)
-                .addOnSuccessListener(a -> {
-                    Toast.makeText(this, "Listing Uploaded Successfully!", Toast.LENGTH_LONG).show();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Upload Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                });
-    }
-
-    public void uploadListing(View view) {
-        addListingToFirebase();
+        startActivity(reviewPage);
     }
 }
+
+

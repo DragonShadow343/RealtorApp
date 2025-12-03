@@ -19,6 +19,12 @@
             android:value="AIzaSyAyNdaagBNBCwB6HhSoNeVVbVUgM3A17uA" />
 
         <activity
+            android:name=".Activities.ConfirmationOfListing"
+            android:exported="false" />
+        <activity
+            android:name=".repository.EditUploadListing"
+            android:exported="false" />
+        <activity
             android:name=".Activities.UploadListingActivity"
             android:exported="false" />
         <activity

@@ -213,31 +213,22 @@
         app:layout_constraintVertical_bias="0.814" />
 
     <Button
-        android:id="@+id/ImageButton"
-        android:layout_width="178dp"
-        android:layout_height="50dp"
-        android:text="Upload Images"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.904" />
-
-    <Button
-        android:id="@+id/UploadListing"
-        android:layout_width="298dp"
-        android:layout_height="49dp"
+        android:id="@+id/CheckButton"
+        android:layout_width="181dp"
+        android:layout_height="47dp"
         android:layout_marginStart="55dp"
         android:layout_marginEnd="57dp"
-        android:onClick="uploadListing"
-        android:text="Upload Listing"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="goToReviewPage"
+        android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.995" />
+        app:layout_constraintVertical_bias="0.94"
+        tools:ignore="OnClick" />
 
     <TextView
         android:id="@+id/NotesText"
@@ -275,7 +266,7 @@
         android:ems="10"
         android:hint="*Title for Listing"
         android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="@+id/UploadListing"
+        app:layout_constraintBottom_toBottomOf="@+id/CheckButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
