@@ -7,6 +7,7 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton; // codeSMS
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class UploadListingActivity extends AppCompatActivity {
     EditText TitleListing, OwnerListing, EmailListing, OwnerPhone, Address1, Address2,
             BedsNo, NoBath, PriceListing, NotesOptional;
     RadioButton PetYes;
+    ImageButton btnBackHome; // codeSMS
 
 
     @SuppressLint("MissingInflatedId")
@@ -52,6 +54,13 @@ public class UploadListingActivity extends AppCompatActivity {
         PriceListing = findViewById(R.id.PriceListing);
         NotesOptional = findViewById(R.id.NotesOptional);
         PetYes = findViewById(R.id.PetYes);
+        btnBackHome = findViewById(R.id.btnBackHome); // codeSMS
+        
+        // codeSMS: Back Button Listener
+        if (btnBackHome != null) {
+            btnBackHome.setOnClickListener(v -> finish());
+        }
+        
         findViewById(R.id.CheckButton).setOnClickListener(v -> goToReviewPage());
 
 
@@ -106,5 +115,3 @@ public class UploadListingActivity extends AppCompatActivity {
         startActivity(reviewPage);
     }
 }
-
-
