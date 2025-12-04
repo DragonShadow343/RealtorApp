@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -28,6 +30,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +57,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
+
+
+// this is for menu bar
+        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+        setSupportActionBar(toolbar);
 
         //this is for the map view
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -132,6 +145,94 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onCancelled(DatabaseError error) { }
         });
     }
+
+
+    // this is for the menu bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.action_upload) {
+            startActivity(new Intent(this, UploadListingActivity.class));
+            return true;
+        }
+
+        if (id == R.id.action_contact) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main, new SMS_Local_Agents()) // R.id.main matches the XML ID above
+                    .addToBackStack(null) // Allows pressing "Back" to return to buttons
+                    .commit();
+        }
+
+        if (id == R.id.action_filter) {
+            startActivityForResult(new Intent(this, FilterActivity.class), 101);
+            return true;
+        }
+
+        if (id == R.id.action_logout) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Log out")
+                    .setMessage("Are you sure you want to log out?")
+                    .setPositiveButton("Log out", (d, w) -> {
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(this, LoginActivity.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        finish();
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 101 && resultCode == RESULT_OK) {
+
+            int minPrice = data.getIntExtra("minPrice", 800);
+            int maxPrice = data.getIntExtra("maxPrice", 5000);
+            int beds = data.getIntExtra("bedrooms", 1);
+            int baths = data.getIntExtra("bathrooms", 1);
+            boolean pets = data.getBooleanExtra("petFriendly", false);
+
+            applyFilters(minPrice, maxPrice, beds, baths, pets);
+        }
+    }
+
+    private void applyFilters(int min, int max, int beds, int baths, boolean pets) {
+
+        List<PropertyListing> filtered = new ArrayList<>();
+
+        for (PropertyListing p : listings) {
+
+            boolean matchesPrice = p.getPrice() >= min && p.getPrice() <= max;
+            boolean matchesBeds = p.getBedroom() >= beds;
+            boolean matchesBaths = p.getBathroom() >= baths;
+            boolean matchesPets = !pets || p.isPetFriendly();
+
+            if (matchesPrice && matchesBeds && matchesBaths && matchesPets) {
+                filtered.add(p);
+            }
+        }
+
+        // Update list + map
+        adapter.updateList(filtered);
+        placeMapMarkers(filtered);
+    }
+
+
 
 
 }

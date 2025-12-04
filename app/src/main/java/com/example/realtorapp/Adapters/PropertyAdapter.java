@@ -89,4 +89,9 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.Proper
             favCheck = itemView.findViewById(R.id.favCheck);
         }
     }
+
+    public void updateList(List<PropertyListing> newList) {
+        this.listings = newList;
+        notifyDataSetChanged();
+    }
 }

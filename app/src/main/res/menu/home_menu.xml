@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_upload"
+        android:title="Upload"
+        android:icon="@android:drawable/ic_menu_upload"
+        android:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_contact"
+        android:title="Contact"
+        android:icon="@android:drawable/ic_menu_call"
+        android:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_filter"
+        android:title="Filter"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_logout"
+        android:title="Logout"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:showAsAction="never" />
+
+
+</menu>
