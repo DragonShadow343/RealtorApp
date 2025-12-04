@@ -7,18 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".Activities.ContactAgentInfoCard">
 
-    <TextView
-        android:id="@+id/ContactText"
-        android:layout_width="185dp"
-        android:layout_height="37dp"
-        android:text="Conatct Options"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.539"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/detailToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.061" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/ContactText"-->
+<!--        android:layout_width="185dp"-->
+<!--        android:layout_height="37dp"-->
+<!--        android:text="Conatct Options"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textSize="24sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.023" />-->
 
     <CalendarView
         android:id="@+id/calendarView"
@@ -85,7 +94,7 @@
         android:layout_height="77dp"
         android:onClick="onCallClicked"
 
-        android:text="Contact via Call"
+        android:text="Call"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
@@ -98,7 +107,7 @@
         android:layout_width="155dp"
         android:layout_height="76dp"
         android:onClick="onEmailClicked"
-        android:text="Contact via Email"
+        android:text="Email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.839"

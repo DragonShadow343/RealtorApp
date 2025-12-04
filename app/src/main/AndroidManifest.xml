@@ -23,6 +23,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".Activities.ContactAgentInfoCard"
+            android:exported="false" />
+
+        <activity
             android:name=".Activities.ConfirmationOfListing"
             android:exported="false" />
         <activity

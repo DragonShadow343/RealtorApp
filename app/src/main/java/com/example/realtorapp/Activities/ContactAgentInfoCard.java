@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -57,6 +58,13 @@ public class ContactAgentInfoCard extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
+
+        Toolbar toolbar = findViewById(R.id.detailToolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Contact Options");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         calendarView.setOnDateChangeListener((view, year, month, day) -> {
@@ -118,6 +126,12 @@ public class ContactAgentInfoCard extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public boolean onSupportNavigateUp() {
+        finish();   // go back to previous activity (home or favourites automatically)
+        return true;
+    }
+
     public void onCallClicked(View view) {
         makePhoneCall();
     }
