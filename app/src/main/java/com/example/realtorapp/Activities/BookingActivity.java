@@ -30,7 +30,6 @@ import java.util.Map;
 
 public class BookingActivity extends AppCompatActivity {
 
-    // Views
     ImageButton btnBack;
     TextView tvTitle;
     CalendarView calendarView;
@@ -49,7 +48,6 @@ public class BookingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sms_activity_booking);
 
-        // Initialize Views
         btnBack = findViewById(R.id.btnBack);
         tvTitle = findViewById(R.id.tvBookingTitle);
         calendarView = findViewById(R.id.calendarView);
@@ -61,28 +59,25 @@ public class BookingActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         btnConfirmBooking = findViewById(R.id.btnConfirmBooking);
 
-        // Firebase reference: Shukan -> bookings
+        // Reference to bookings node
         databaseReference = FirebaseDatabase.getInstance().getReference("Shukan").child("bookings");
 
-        // Get Agent Name from Intent
         agentName = getIntent().getStringExtra("agentName");
         if (agentName != null) {
             tvTitle.setText("Book with " + agentName);
         }
 
-        // Set default selected date to today
         long currentTime = System.currentTimeMillis();
         calendarView.setMinDate(currentTime);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         selectedDate = sdf.format(currentTime);
 
-        // Check availability for default date
         checkFirebaseAvailability();
 
-        // Calendar Listener
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                // Ensure consistent format
                 selectedDate = String.format(Locale.getDefault(), "%d-%02d-%02d", year, month + 1, dayOfMonth);
                 
                 radioGroupSlots.clearCheck();
@@ -93,10 +88,8 @@ public class BookingActivity extends AppCompatActivity {
             }
         });
 
-        // Back Button
         btnBack.setOnClickListener(v -> finish());
 
-        // Slot Selection
         radioGroupSlots.setOnCheckedChangeListener((group, checkedId) -> {
             RadioButton selectedRb = findViewById(checkedId);
             if (selectedRb != null) {
@@ -105,7 +98,6 @@ public class BookingActivity extends AppCompatActivity {
             }
         });
 
-        // Confirm Booking
         btnConfirmBooking.setOnClickListener(v -> {
             String first = etFirstName.getText().toString().trim();
             String last = etLastName.getText().toString().trim();
@@ -122,17 +114,16 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     private void checkFirebaseAvailability() {
-        // Query Firebase for bookings for this agent on this date
         databaseReference.orderByChild("agentName").equalTo(agentName)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        // First, show all slots
+                        // Reset visibility
                         for (int i = 0; i < radioGroupSlots.getChildCount(); i++) {
                             radioGroupSlots.getChildAt(i).setVisibility(View.VISIBLE);
                         }
 
-                        // Then hide the ones that match date & agent
+                        // Hide slots that match date & agent
                         for (DataSnapshot data : snapshot.getChildren()) {
                             String date = data.child("date").getValue(String.class);
                             String slot = data.child("slot").getValue(String.class);
@@ -177,7 +168,6 @@ public class BookingActivity extends AppCompatActivity {
 
         databaseReference.child(bookingId).setValue(bookingData)
                 .addOnSuccessListener(aVoid -> {
-                    // Success
                     Intent intent = new Intent(BookingActivity.this, SMS_BookingConfirmedActivity.class);
                     intent.putExtra("agentName", agentName);
                     intent.putExtra("slot", selectedDate + " at " + selectedSlot);
