@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header with Back Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="24dp">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/sms_ic_back_arrow"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Back"
+                android:tint="#000000"/>
+
+            <TextView
+                android:id="@+id/tvBookingTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Book Appointment"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_marginStart="16dp"/>
+        </LinearLayout>
+
+        <!-- Section 1: Calendar View -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Date"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp"/>
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="#F5F5F5"/>
+
+        <!-- Section 2: Select Time Slot -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select a Time Slot"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="12dp"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupSlots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="24dp">
+
+            <RadioButton
+                android:id="@+id/rbSlot1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="10:00 AM - 11:00 AM"
+                android:textSize="16sp"
+                android:padding="8dp"/>
+
+            <RadioButton
+                android:id="@+id/rbSlot2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="11:00 AM - 12:00 PM"
+                android:textSize="16sp"
+                android:padding="8dp"/>
+
+            <RadioButton
+                android:id="@+id/rbSlot3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="02:00 PM - 03:00 PM"
+                android:textSize="16sp"
+                android:padding="8dp"/>
+
+            <RadioButton
+                android:id="@+id/rbSlot4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="04:00 PM - 05:00 PM"
+                android:textSize="16sp"
+                android:padding="8dp"/>
+        </RadioGroup>
+
+        <!-- Section 3: Personal Details (Hidden initially) -->
+        <LinearLayout
+            android:id="@+id/layoutDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Details"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_marginBottom="12dp"/>
+
+            <EditText
+                android:id="@+id/etFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="First Name"
+                android:inputType="textPersonName"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginBottom="12dp"/>
+
+            <EditText
+                android:id="@+id/etLastName"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Last Name"
+                android:inputType="textPersonName"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginBottom="12dp"/>
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Phone Number"
+                android:inputType="phone"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginBottom="12dp"/>
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Email Address"
+                android:inputType="textEmailAddress"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginBottom="24dp"/>
+
+            <Button
+                android:id="@+id/btnConfirmBooking"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Confirm Booking"
+                android:textSize="18sp"
+                android:backgroundTint="#000000"
+                android:textColor="#FFFFFF"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
