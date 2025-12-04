@@ -46,9 +46,6 @@
             android:name=".Activities.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".Adapters.FavouriteAdapter"
-            android:exported="false" />
-        <activity
             android:name=".Activities.FavouritesActivity"
             android:exported="false" />
         <activity
