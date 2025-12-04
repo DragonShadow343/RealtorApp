@@ -1,17 +1,20 @@
 package com.example.realtorapp.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.realtorapp.Activities.ListingDetailActivity;
 import com.example.realtorapp.R;
 import com.example.realtorapp.model.PropertyListing;
+import com.example.realtorapp.utils.FavouriteManager;
 
 import java.util.List;
 
@@ -41,10 +44,30 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.Proper
         holder.price.setText(String.valueOf(item.getPrice()));
         holder.address.setText(item.getAddress());
 
-        // krish add your code here to add it to favourites
-        // add this code to gpt and ask it
-        // You can wire favourite logic here later
-        holder.favCheck.setChecked(false);   // default
+        // Set heart state
+        FavouriteManager.isFavourite(context, item.getListingId(), isFav -> {
+            holder.favCheck.setImageResource(
+                    isFav ? R.drawable.ic_heart_filled : R.drawable.ic_heart_outline
+            );
+        });
+
+        // Toggle favourite
+        holder.favCheck.setOnClickListener(v -> {
+            FavouriteManager.toggleFavourite(context, item.getListingId());
+
+            FavouriteManager.isFavourite(context, item.getListingId(), isFav -> {
+                holder.favCheck.setImageResource(
+                        isFav ? R.drawable.ic_heart_filled : R.drawable.ic_heart_outline
+                );
+            });
+        });
+
+        // Open detail page
+        holder.itemView.setOnClickListener(v -> {
+            Intent i = new Intent(context, ListingDetailActivity.class);
+            i.putExtra("listingId", item.getListingId());
+            context.startActivity(i);
+        });
     }
 
     @Override
@@ -55,7 +78,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.Proper
     public static class PropertyViewHolder extends RecyclerView.ViewHolder {
 
         TextView title, price, address;
-        CheckBox favCheck;
+        ImageButton favCheck;
 
         public PropertyViewHolder(@NonNull View itemView) {
             super(itemView);

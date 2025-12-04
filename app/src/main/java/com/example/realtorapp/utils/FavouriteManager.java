@@ -142,7 +142,7 @@ public class FavouriteManager {
         saveLocalFavourites(context, new HashSet<>());
     }
 
-    private interface FavouriteCheckCallback {void onResult(boolean isFavourite);}
+    public interface FavouriteCheckCallback {void onResult(boolean isFavourite);}
 
-    private interface FavouritesListCallback {void onResult(Set<String> ids);}
+    public interface FavouritesListCallback {void onResult(Set<String> ids);}
 }

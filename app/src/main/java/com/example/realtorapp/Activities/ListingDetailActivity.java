@@ -1,37 +1,90 @@
 package com.example.realtorapp.Activities;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.realtorapp.R;
+import com.example.realtorapp.model.PropertyListing;
+import com.example.realtorapp.repository.ListingRepo;
+import com.example.realtorapp.utils.FavouriteManager;
 
 public class ListingDetailActivity extends AppCompatActivity {
+
+    private ImageView detailImage;
+    private ImageButton favouriteBtn;
+    private TextView detailPrice, detailAddress, detailBeds, detailBaths, detailSqft, detailDescription;
+    private Button contactAgentBtn;
+
+    private ListingRepo ListingRepository;
+    private String listingId;
+    private PropertyListing listing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_listing_detail);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        ListingRepository = new ListingRepo();
+
+        listingId = getIntent().getStringExtra("listingId");
+
+        bindViews();
+        loadListing();
+    }
+
+    private void bindViews() {
+        detailImage = findViewById(R.id.detailImage);
+        favouriteBtn = findViewById(R.id.detailFavouriteButton);
+
+        detailPrice = findViewById(R.id.detailPrice);
+        detailAddress = findViewById(R.id.detailAddress);
+        detailBeds = findViewById(R.id.detailBeds);
+        detailBaths = findViewById(R.id.detailBaths);
+        detailSqft = findViewById(R.id.detailSqft);
+        detailDescription = findViewById(R.id.detailDescription);
+
+        contactAgentBtn = findViewById(R.id.contactAgentBtn);
+    }
+
+    private void loadListing() {
+        ListingRepository.getListing(listingId, result -> {
+            listing = result;
+            if (listing != null) {
+                updateUI();
+                setupFavouriteButton();
+            }
+        });
+    }
+
+    private void updateUI() {
+        detailPrice.setText("$" + listing.getPrice());
+        detailAddress.setText(listing.getTitle());
+        detailBeds.setText(listing.getBedroom() + " Beds");
+        detailBaths.setText(listing.getBathroom() + " Baths");
+        detailDescription.setText(listing.getDescription());
+    }
+
+    private void setupFavouriteButton() {
+        FavouriteManager.isFavourite(this, listingId, isFav -> {
+            favouriteBtn.setImageResource(
+                    isFav ? R.drawable.ic_heart_filled : R.drawable.ic_heart_outline
+            );
         });
 
-        Intent intent = new Intent(this, BookingActivity.class);
+        favouriteBtn.setOnClickListener(v -> {
+            FavouriteManager.toggleFavourite(this, listingId);
 
-
-
-
-
-        startActivity(intent);
-        finish();
-
+            FavouriteManager.isFavourite(this, listingId, isFav -> {
+                favouriteBtn.setImageResource(
+                        isFav ? R.drawable.ic_heart_filled : R.drawable.ic_heart_outline
+                );
+            });
+        });
     }
 }

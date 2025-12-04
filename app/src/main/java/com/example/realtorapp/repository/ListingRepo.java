@@ -13,7 +13,7 @@ public class ListingRepo {
     private DatabaseReference db;
 
     public ListingRepo() {
-        db = FirebaseDatabase.getInstance().getReference("listings");
+        db = FirebaseDatabase.getInstance().getReference("property_listings");
     }
 
     public void getAllListings(String userId) {
