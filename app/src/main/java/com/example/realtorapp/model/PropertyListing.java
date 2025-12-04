@@ -1,7 +1,8 @@
 package com.example.realtorapp.model;
 
 public class PropertyListing {
-    private String listingId, title, description, address, status, imageUrl, agentId;
+    private String listingId, title, description, address, status, imageUrl, agentId, ownerPhone, ownerEmail;
+
     private double price;
     private int bathroom, bedroom;
     private boolean petFriendly;
@@ -59,6 +60,13 @@ public class PropertyListing {
         return longitude;
     }
 
+    public PropertyListing() {
+    }
+
+    public String getOwnerEmail() { return ownerEmail; }
+
+    public String getOwnerPhone() { return ownerPhone; }
+
 
     //Setters:
 
@@ -88,6 +96,8 @@ public class PropertyListing {
         this.lattitude = lattitude; }
     public void setLongitude(double longitude) {
         this.longitude = longitude; }
+    public void setOwnerEmail(String ownerEmail) { this.ownerEmail = ownerEmail; }
+    public void setOwnerPhone(String ownerPhone) { this.ownerPhone = ownerPhone; }
 
 
 }

@@ -119,6 +119,8 @@ public class EditUploadListing extends AppCompatActivity {
         listing.setAgentId(FirebaseAuth.getInstance().getUid());
         listing.setLattitude(latitude);
         listing.setLongitude(longitude);
+        listing.setOwnerEmail(email);
+        listing.setOwnerPhone(phone);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("property_listings");
 

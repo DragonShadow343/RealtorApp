@@ -1,5 +1,6 @@
 package com.example.realtorapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -67,6 +68,12 @@ public class ListingDetailActivity extends AppCompatActivity {
             if (listing != null) {
                 updateUI();
                 setupFavouriteButton();
+                contactAgentBtn.setOnClickListener(v -> {
+                    Intent intent = new Intent(ListingDetailActivity.this, ContactAgentInfoCard.class);
+                    intent.putExtra("ownerPhone", listing.getOwnerPhone());
+                    intent.putExtra("ownerEmail", listing.getOwnerEmail());
+                    startActivity(intent);
+                });
             }
         });
     }
