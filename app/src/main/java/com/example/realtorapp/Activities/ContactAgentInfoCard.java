@@ -41,6 +41,8 @@ public class ContactAgentInfoCard extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_contact_agent_info_card);
 
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) ImageButton backButton = findViewById(R.id.btnBack);
+
         callBtn = findViewById(R.id.CallBtn);
         emailBtn = findViewById(R.id.MailBtn);
         calendarView = findViewById(R.id.calendarView);
@@ -51,6 +53,10 @@ public class ContactAgentInfoCard extends AppCompatActivity {
         email = getIntent().getStringExtra("ownerEmail");
 
         setupTimeSlots();
+
+        if (backButton != null) {
+            backButton.setOnClickListener(v -> finish());
+        }
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

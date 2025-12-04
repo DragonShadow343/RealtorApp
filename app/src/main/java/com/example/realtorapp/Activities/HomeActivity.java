@@ -158,6 +158,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             return true;
         }
 
+        if (id == R.id.action_favorites) {
+            startActivity(new Intent(this, FavouritesActivity.class));
+            return true;
+        }
+
         if (id == R.id.action_contact) {
             // codeSMS: Changed to hide other views when showing the fragment
             findViewById(R.id.cardMap).setVisibility(android.view.View.GONE);

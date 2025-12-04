@@ -77,8 +77,8 @@
 
     <Button
         android:id="@+id/CallBtn"
-        android:layout_width="153dp"
-        android:layout_height="77dp"
+        android:layout_width="155dp"
+        android:layout_height="49dp"
         android:onClick="onCallClicked"
 
         android:text="Call"
@@ -87,19 +87,19 @@
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.168" />
+        app:layout_constraintVertical_bias="0.216" />
 
     <Button
         android:id="@+id/MailBtn"
-        android:layout_width="155dp"
-        android:layout_height="76dp"
+        android:layout_width="160dp"
+        android:layout_height="49dp"
         android:onClick="onEmailClicked"
         android:text="Email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.839"
+        app:layout_constraintHorizontal_bias="0.844"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.17" />
+        app:layout_constraintVertical_bias="0.212" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
