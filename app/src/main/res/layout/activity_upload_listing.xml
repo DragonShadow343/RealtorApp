@@ -1,314 +1,293 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".Activities.UploadListingActivity">
 
-    <EditText
-        android:id="@+id/OwnerListing"
-        android:layout_width="341dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="34dp"
-        android:ems="10"
-        android:hint="*Name of Owner"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.154" />
-
-    <EditText
-        android:id="@+id/EmailListing"
-        android:layout_width="339dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="36dp"
-        android:ems="10"
-        android:hint="*Contact Email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.222" />
-
-    <EditText
-        android:id="@+id/OwnerPhone"
-        android:layout_width="339dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="36dp"
-        android:ems="10"
-        android:hint="*Contact Phone Number"
-        android:inputType="phone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.285" />
-
-    <EditText
-        android:id="@+id/Address1"
-        android:layout_width="338dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="37dp"
-        android:ems="10"
-        android:hint="*Address Line 1"
-        android:inputType="textPostalAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.389" />
-
-    <EditText
-        android:id="@+id/Address2"
-        android:layout_width="338dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="37dp"
-        android:ems="10"
-        android:hint="Address Line 2"
-        android:inputType="textPostalAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.458" />
-
-    <TextView
-        android:id="@+id/TextAddress"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="207dp"
-        android:text="Enter you Address:"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.34" />
+        android:paddingBottom="32dp">
 
-    <EditText
-        android:id="@+id/BedsNo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.835"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.545" />
+        <!-- codeSMS: Back Button -->
+        <ImageButton
+            android:id="@+id/btnBackHome"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/sms_ic_back_arrow"
+            app:tint="#000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textBedrooms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="19dp"
-        android:text="*Bedrooms:"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/BedsNo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.538" />
+        <TextView
+            android:id="@+id/ListingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload a Listing"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBackHome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnBackHome" />
 
-    <TextView
-        android:id="@+id/TextBath"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="37dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="40dp"
-        android:text="*Bathrooms:"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/TextPet"
-        app:layout_constraintEnd_toStartOf="@+id/NoBath"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textBedrooms" />
+        <EditText
+            android:id="@+id/TitleListing"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="*Title for Listing"
+            android:inputType="text"
+            android:paddingStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ListingText" />
 
-    <EditText
-        android:id="@+id/NoBath"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="29dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/TextPet"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.835"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        <EditText
+            android:id="@+id/OwnerListing"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="*Name of Owner"
+            android:inputType="text"
+            android:paddingStart="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/TitleListing"
+            app:layout_constraintStart_toStartOf="@+id/TitleListing"
+            app:layout_constraintTop_toBottomOf="@+id/TitleListing" />
 
-    <TextView
-        android:id="@+id/TextPet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="26dp"
-        android:text="*Is it Pet Friendly?"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.164"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.708" />
+        <EditText
+            android:id="@+id/EmailListing"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="*Contact Email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/OwnerListing"
+            app:layout_constraintStart_toStartOf="@+id/OwnerListing"
+            app:layout_constraintTop_toBottomOf="@+id/OwnerListing" />
 
-    <TextView
-        android:id="@+id/ListingText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="131dp"
-        android:layout_marginEnd="131dp"
-        android:text="Upload a Listing:"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.046" />
+        <EditText
+            android:id="@+id/OwnerPhone"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="*Contact Phone Number"
+            android:inputType="phone"
+            android:paddingStart="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/EmailListing"
+            app:layout_constraintStart_toStartOf="@+id/EmailListing"
+            app:layout_constraintTop_toBottomOf="@+id/EmailListing" />
 
-    <TextView
-        android:id="@+id/TextPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" *Price (in CAD):"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.835"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.747" />
+        <TextView
+            android:id="@+id/TextAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Property Address"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            app:layout_constraintStart_toStartOf="@+id/OwnerPhone"
+            app:layout_constraintTop_toBottomOf="@+id/OwnerPhone" />
 
-    <EditText
-        android:id="@+id/PriceListing"
-        android:layout_width="151dp"
-        android:layout_height="42dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.857"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.814" />
+        <EditText
+            android:id="@+id/Address1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="*Address Line 1"
+            android:inputType="textPostalAddress"
+            android:paddingStart="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/OwnerPhone"
+            app:layout_constraintStart_toStartOf="@+id/OwnerPhone"
+            app:layout_constraintTop_toBottomOf="@+id/TextAddress" />
 
-    <Button
-        android:id="@+id/CheckButton"
-        android:layout_width="181dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="57dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="goToReviewPage"
-        android:text="Next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94"
-        tools:ignore="OnClick" />
+        <EditText
+            android:id="@+id/Address2"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="Address Line 2"
+            android:inputType="textPostalAddress"
+            android:paddingStart="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/Address1"
+            app:layout_constraintStart_toStartOf="@+id/Address1"
+            app:layout_constraintTop_toBottomOf="@+id/Address1" />
 
-    <TextView
-        android:id="@+id/NotesText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="14dp"
-        android:text="Notes:"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/TextPet"
-        app:layout_constraintEnd_toStartOf="@+id/NotesOptional"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextBath" />
+        <LinearLayout
+            android:id="@+id/layoutSpecs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/Address2"
+            app:layout_constraintStart_toStartOf="@+id/Address2"
+            app:layout_constraintTop_toBottomOf="@+id/Address2">
 
-    <EditText
-        android:id="@+id/NotesOptional"
-        android:layout_width="270dp"
-        android:layout_height="42dp"
-        android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.663" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/TitleListing"
-        android:layout_width="341dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginEnd="33dp"
-        android:ems="10"
-        android:hint="*Title for Listing"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="@+id/CheckButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.09" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*Beds"
+                    android:textColor="#333333" />
 
-    <RadioGroup
-        android:id="@+id/PetYesNo"
-        android:layout_width="0dp"
-        android:layout_height="4dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="731dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+                <EditText
+                    android:id="@+id/BedsNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@android:drawable/edit_text"
+                    android:inputType="number"
+                    android:paddingStart="4dp" />
+            </LinearLayout>
 
-    </RadioGroup>
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="wrap_content" />
 
-    <RadioButton
-        android:id="@+id/PetYes"
-        android:layout_width="118dp"
-        android:layout_height="37dp"
-        android:layout_marginEnd="55dp"
-        android:text="Yes"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.21"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.763" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-    <RadioButton
-        android:id="@+id/PetNo"
-        android:layout_width="118dp"
-        android:layout_height="37dp"
-        android:text="No"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.17"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.817" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*Baths"
+                    android:textColor="#333333" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <EditText
+                    android:id="@+id/NoBath"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@android:drawable/edit_text"
+                    android:inputType="number"
+                    android:paddingStart="4dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/TextPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="*Price (CAD)"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/layoutSpecs"
+            app:layout_constraintTop_toBottomOf="@+id/layoutSpecs" />
+
+        <EditText
+            android:id="@+id/PriceListing"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:drawable/edit_text"
+            android:inputType="numberDecimal"
+            android:paddingStart="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/layoutSpecs"
+            app:layout_constraintStart_toStartOf="@+id/layoutSpecs"
+            app:layout_constraintTop_toBottomOf="@+id/TextPrice" />
+
+        <TextView
+            android:id="@+id/TextPet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="*Pet Friendly?"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/PriceListing"
+            app:layout_constraintTop_toBottomOf="@+id/PriceListing" />
+
+        <RadioGroup
+            android:id="@+id/PetYesNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/TextPet"
+            app:layout_constraintStart_toEndOf="@+id/TextPet"
+            app:layout_constraintTop_toTopOf="@+id/TextPet">
+
+            <RadioButton
+                android:id="@+id/PetYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes" />
+
+            <RadioButton
+                android:id="@+id/PetNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="No" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/NotesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Notes"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/PriceListing"
+            app:layout_constraintTop_toBottomOf="@+id/TextPet" />
+
+        <EditText
+            android:id="@+id/NotesOptional"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:drawable/edit_text"
+            android:gravity="top|start"
+            android:inputType="textMultiLine"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/PriceListing"
+            app:layout_constraintStart_toStartOf="@+id/PriceListing"
+            app:layout_constraintTop_toBottomOf="@+id/NotesText" />
+
+        <Button
+            android:id="@+id/CheckButton"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="#000000"
+            android:onClick="goToReviewPage"
+            android:text="Next"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/NotesOptional"
+            app:layout_constraintStart_toStartOf="@+id/NotesOptional"
+            app:layout_constraintTop_toBottomOf="@+id/NotesOptional" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
