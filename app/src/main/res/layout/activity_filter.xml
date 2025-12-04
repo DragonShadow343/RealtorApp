@@ -23,10 +23,10 @@
                 android:id="@+id/btnBack"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/sms_ic_back_arrow"
+                android:layout_gravity="start|center_vertical"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Back"
-                android:layout_gravity="start|center_vertical"
+                android:src="@drawable/sms_ic_back_arrow"
                 app:tint="#000000" />
 
         </FrameLayout>
