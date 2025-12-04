@@ -48,9 +48,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     RecyclerView listingsRecycler;
     PropertyAdapter adapter;
 
-
-
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,33 +56,29 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_home);
 
 
-// this is for menu bar
+        // this is for menu bar
         MaterialToolbar toolbar = findViewById(R.id.topAppBar);
         setSupportActionBar(toolbar);
 
         //this is for the map view
-            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.homeMap);
-            mapFragment.getMapAsync(this);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.homeMap);
+        mapFragment.getMapAsync(this);
 
 
-            // for the list under the map
-         listingsRecycler = findViewById(R.id.listingsRecycler);
-         // layout manager for vertical list
+        // for the list under the map
+        listingsRecycler = findViewById(R.id.listingsRecycler);
+        // layout manager for vertical list
         listingsRecycler.setLayoutManager(new LinearLayoutManager(this));
         // connectint to the  adapter
         adapter = new PropertyAdapter(this, listings);
         listingsRecycler.setAdapter(adapter);
-
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-
     }
 
     public void onMapReady(GoogleMap map) {
@@ -166,10 +159,16 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         if (id == R.id.action_contact) {
+            // codeSMS: Changed to hide other views when showing the fragment
+            findViewById(R.id.cardMap).setVisibility(android.view.View.GONE);
+            findViewById(R.id.tvListingHeader).setVisibility(android.view.View.GONE);
+            findViewById(R.id.listingsRecycler).setVisibility(android.view.View.GONE);
+
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main, new SMS_Local_Agents()) // R.id.main matches the XML ID above
-                    .addToBackStack(null) // Allows pressing "Back" to return to buttons
+                    .replace(R.id.main, new SMS_Local_Agents())
+                    .addToBackStack(null)
                     .commit();
+            return true;
         }
 
         if (id == R.id.action_filter) {
@@ -192,6 +191,19 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // codeSMS: Restore visibility when fragment is removed
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+            findViewById(R.id.cardMap).setVisibility(android.view.View.VISIBLE);
+            findViewById(R.id.tvListingHeader).setVisibility(android.view.View.VISIBLE);
+            findViewById(R.id.listingsRecycler).setVisibility(android.view.View.VISIBLE);
+        } else {
+            super.onBackPressed();
+        }
     }
 
 
@@ -231,8 +243,5 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         adapter.updateList(filtered);
         placeMapMarkers(filtered);
     }
-
-
-
 
 }
