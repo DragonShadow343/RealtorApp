@@ -53,7 +53,11 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.Proper
 
         // Toggle favourite
         holder.favCheck.setOnClickListener(v -> {
-            FavouriteManager.toggleFavourite(context, item.getListingId());
+            FavouriteManager.toggleFavourite(context, item.getListingId(), nowFav -> {
+                holder.favCheck.setImageResource(
+                        nowFav ? R.drawable.ic_heart_filled : R.drawable.ic_heart_outline
+                );
+            });
 
             FavouriteManager.isFavourite(context, item.getListingId(), isFav -> {
                 holder.favCheck.setImageResource(

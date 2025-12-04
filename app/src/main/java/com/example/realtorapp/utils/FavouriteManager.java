@@ -2,6 +2,7 @@ package com.example.realtorapp.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -46,20 +47,31 @@ public class FavouriteManager {
 
     private static DatabaseReference getFirebaseRef() {
         String userId = getUserId();
-        return FirebaseDatabase.getInstance().getReference("users").child(userId).child("favourites");
+        if (userId == null) return null;
+
+        return FirebaseDatabase.getInstance()
+                .getReference("users")
+                .child(userId)
+                .child("favourites");
     }
 
     // Public Methods to manage favourites
 
-    public static void toggleFavourite(Context context, String listingId) {
+    public static void toggleFavourite(Context context, String listingId, FavouriteCheckCallback callback) {
         if (getUserId() == null) {
             Set<String> favs = getLocalFavourites(context);
+
+            boolean nowFav;
+
             if (favs.contains(listingId)) {
                 favs.remove(listingId);
+                nowFav=false;
             } else {
                 favs.add(listingId);
+                nowFav=true;
             }
             saveLocalFavourites(context, favs);
+            callback.onResult(nowFav);
             return;
         }
 
@@ -67,20 +79,22 @@ public class FavouriteManager {
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    ref.setValue(null); // remove listing from favourites
+                    ref.removeValue().addOnSuccessListener(unused -> callback.onResult(false)); // remove listing from favourites
                 } else {
-                    ref.setValue(true); // add listing from favourites
+                    ref.setValue(true).addOnSuccessListener(unused -> callback.onResult(true)); // add listing from favourites
                 }
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {}
+            public void onCancelled(@NonNull DatabaseError error) {
+                callback.onResult(false);
+            }
         });
     }
 
-    public static void isFavourite(Context context, String listingId, FavouriteCheckCallback callback) {
+    public static void isFavourite(Context context, String listingId, FavouriteToggleCallback callback) {
 
         // Local
         if (getUserId() == null) {
@@ -129,8 +143,7 @@ public class FavouriteManager {
 
     }
     public static void syncLocalToFirebase(Context context) {
-        String userId = getUserId();
-        if (userId == null) return;
+        if (getUserId() == null) return;
 
         Set<String> localFavs = getLocalFavourites(context);
 
@@ -144,5 +157,6 @@ public class FavouriteManager {
 
     public interface FavouriteCheckCallback {void onResult(boolean isFavourite);}
 
+    public interface FavouriteToggleCallback {void onResult(boolean nowFavourite);}
     public interface FavouritesListCallback {void onResult(Set<String> ids);}
 }

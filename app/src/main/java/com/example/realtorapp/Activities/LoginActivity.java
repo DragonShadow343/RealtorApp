@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.realtorapp.R;
 import com.example.realtorapp.auth.AuthRepo;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -110,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void loginASguest(View view){
         Intent intent = new Intent(this, HomeActivity.class);
+        FirebaseAuth.getInstance().signOut();
         startActivity(intent);
         finish();
     }

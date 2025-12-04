@@ -100,7 +100,11 @@ public class ListingDetailActivity extends AppCompatActivity {
         });
 
         favouriteBtn.setOnClickListener(v -> {
-            FavouriteManager.toggleFavourite(this, listingId);
+            FavouriteManager.toggleFavourite(this, listingId, nowFav -> {
+                favouriteBtn.setImageResource(
+                        nowFav ? R.drawable.ic_heart_filled : R.drawable.ic_heart_outline
+                );
+            });
 
             FavouriteManager.isFavourite(this, listingId, isFav -> {
                 favouriteBtn.setImageResource(
