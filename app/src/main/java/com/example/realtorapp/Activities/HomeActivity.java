@@ -145,6 +145,15 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.home_menu, menu);
+
+        //DonebySMS: Check if user is logged in, if not hide logout button
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            MenuItem logoutItem = menu.findItem(R.id.action_logout);
+            if (logoutItem != null) {
+                logoutItem.setVisible(false);
+            }
+        }
+
         return true;
     }
 
