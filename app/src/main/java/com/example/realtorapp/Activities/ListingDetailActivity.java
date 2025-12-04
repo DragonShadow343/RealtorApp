@@ -42,7 +42,7 @@ public class ListingDetailActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(""); // empty, since your page already shows title below
+            getSupportActionBar().setTitle("Listing Detail"); // empty, since your page already shows title below
         }
 
         loadListing();
