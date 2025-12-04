@@ -35,6 +35,15 @@ public class ListingDetailActivity extends AppCompatActivity {
         listingId = getIntent().getStringExtra("listingId");
 
         bindViews();
+
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.detailToolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(""); // empty, since your page already shows title below
+        }
+
         loadListing();
     }
 
@@ -68,6 +77,12 @@ public class ListingDetailActivity extends AppCompatActivity {
         detailBeds.setText(listing.getBedroom() + " Beds");
         detailBaths.setText(listing.getBathroom() + " Baths");
         detailDescription.setText(listing.getDescription());
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();   // go back to previous activity (home or favourites automatically)
+        return true;
     }
 
     private void setupFavouriteButton() {

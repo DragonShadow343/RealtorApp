@@ -11,6 +11,14 @@
         android:layout_height="wrap_content">
 
         <!-- Header Image -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/detailToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:elevation="4dp"/>
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="250dp">
